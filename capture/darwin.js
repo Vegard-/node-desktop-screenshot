@@ -5,17 +5,15 @@ module.exports = function(options, callback) {
 	var path = require('path');
 	var fs = require('fs');
 	var childProcess = require('child_process');
-	var tmp = require('tmp');
+	var temp = require('temp');
 
 	// due to bug in jpgjs processing OSX jpg images https://github.com/notmasteryet/jpgjs/issues/34
 	// when requesting JPG capture as PNG, so JIMP can read it
 	var ext = extension(options.output);
 	if(ext === "jpeg" || ext === "jpg") {
-		tmp.file({ postfix: '.png' }, function(err, temporaryPath, fd) {
-			options.intermediate = temporaryPath; // create an intermediate file that can be processed, then deleted
-			capture(options.intermediate, function(error, completed){
-				callbackReturn.apply(this, arguments);
-			});
+		options.intermediate = temp.path({ suffix: '.png' });; // create an intermediate file that can be processed, then deleted
+		capture(options.intermediate, function(error, completed){
+			callbackReturn.apply(this, arguments);
 		});
 	}
 	else {

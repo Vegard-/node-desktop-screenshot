@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "jimp": "0.2.x",
-    "tmp": "0.0.28"
+    "temp": "^0.8.3"
   },
   "main": "module.js"
 }
