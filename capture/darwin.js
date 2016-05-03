@@ -35,9 +35,17 @@ module.exports = function(options, callback) {
 	}
 
 	function capture(output, callback) {
-		var cmd = "screencapture"
-		+ " -t " + path.extname(output).toLowerCase().substring(1) // will create PNG by default
-		+ " -x " + output;
+		var cmdBuilder = [
+			"screencapture",
+			"-t", path.extname(output).toLowerCase().substring(1) // will create PNG by default
+			"-x", output
+		];
+		if (options.windowId){
+			// Will only capture the specified window id.
+			cmdBuilder.push('-t');
+			cmdBuilder.push(options.windowId);
+		}
+		var cmd = cmdBuilder.join(' ');
 
 		childProcess.exec(cmd, function(error, stdout, stderr) {
 			if(error)
