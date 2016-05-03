@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = function(options, callback) {
 
 	var path = require('path');
@@ -37,7 +39,7 @@ module.exports = function(options, callback) {
 	function capture(output, callback) {
 		var cmdBuilder = [
 			"screencapture",
-			"-t", path.extname(output).toLowerCase().substring(1) // will create PNG by default
+			"-t", path.extname(output).toLowerCase().substring(1), // will create PNG by default
 			"-x", output
 		];
 		if (options.windowId){

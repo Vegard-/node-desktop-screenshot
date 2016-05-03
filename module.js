@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = function() {
 	return new Screenshot(arguments);
 };
@@ -7,7 +9,7 @@ var jimp = require('jimp');
 var fs = require('fs');
 var captureModule = {
 	'win32': require('./capture/win32.js'),
-	'darwin': require('./capture/darwin.js'),
+	'darwin': require('./capture/darwin.js')
 };
 
 function Screenshot(args) {
