@@ -3,6 +3,7 @@
   "version": "0.0.6",
   "description": "Cross-platform screenshot module, using external tools",
   "license": "MIT",
+  "os": [ "win32", "darwin" ],
   "author": {
     "name": "John Murphy-Teixidor",
     "email": "johnvmt@gmail.com"
