@@ -47,12 +47,12 @@ Windows version uses nircmd (http://nircmd.nirsoft.net)
 
 ### By Window ID - OS X / Darwin only ###
 
-		screenshot("screenshot.jpg", {windowId: 12345}, function(error, complete) {
-				if(error)
-						console.log("Screenshot failed", error);
-				else
-						console.log("Screenshot succeeded");
-		});
+	screenshot("screenshot.jpg", {windowId: 12345}, function(error, complete) {
+		if(error)
+			console.log("Screenshot failed", error);
+		else
+			console.log("Screenshot succeeded");
+	});
 
 A window id can be obtained by for example using [node-window-listing](https://github.com/Vegard-/node-window-listing).
 
