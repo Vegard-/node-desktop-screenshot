@@ -5,13 +5,17 @@ module.exports = function() {
 var path = require('path');
 var jimp = require('jimp');
 var fs = require('fs');
+var captureModule = {
+	'win32': require('./capture/win32.js'),
+	'darwin': require('./capture/darwin.js'),
+};
 
 function Screenshot(args) {
 	var config = this.parseArgs(args);
 	var self = this;
 
 	try {
-		require("./capture/" + process.platform + ".js")(config.options, function(error, options) {
+		captureModule[process.platform](config.options, function(error, options) {
 			// TODO add option for string, rather than file
 			if(error && typeof config.callback === "function")
 				config.callback(error, null);
