@@ -53,18 +53,22 @@ Screenshot.prototype.processImage = function(input, output, options, callback) {
 		callback(null);
 	else {
 		new jimp(input, function (err, image) {
+			var resWidth = null;
+			var resHeight = null;
 			if(typeof options.width === "number")
-				var resWidth = Math.floor(options.width);
+				resWidth = Math.floor(options.width);
 			if(typeof options.height === "number")
-				var resHeight = Math.floor(options.height);
+				resHeight = Math.floor(options.height);
 
 			if(typeof resWidth === "number" && typeof resHeight !== "number") // resize to width, maintain aspect ratio
-				var resHeight = Math.floor(image.bitmap.height * (resWidth / image.bitmap.width));
+				resHeight = Math.floor(image.bitmap.height * (resWidth / image.bitmap.width));
 			else if(typeof resHeight === "number" && typeof resWidth !== "number") // resize to height, maintain aspect ratio
-				var resWidth = Math.floor(image.bitmap.width * (resHeight / image.bitmap.height));
+				resWidth = Math.floor(image.bitmap.width * (resHeight / image.bitmap.height));
 
 			try {
-				image.resize(resWidth, resHeight);
+				if (resHeight && resWidth){
+					image.resize(resWidth, resHeight);
+				}
 
 				if(typeof options.quality === "number" && options.quality >= 0 && options.quality <= 100)
 					image.quality(Math.floor(options.quality)); // only works with JPEGs
