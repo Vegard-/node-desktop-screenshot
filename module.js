@@ -24,7 +24,9 @@ function Screenshot(args) {
 			else if(!error) {
 				if (typeof options.intermediate === "string") {
 					self.processImage(options.intermediate, options.output, options, function (error, success) {
-						fs.unlink(options.intermediate, handleCallback); // delete intermediate
+						fs.unlink(options.intermediate, function(){
+							handleCallback(error, success);
+						}); // delete intermediate
 					});
 				}
 				else
