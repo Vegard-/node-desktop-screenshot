@@ -11,7 +11,7 @@ module.exports = function(options, callback) {
 	// when requesting JPG capture as PNG, so JIMP can read it
 	var ext = extension(options.output);
 	if(ext === "jpeg" || ext === "jpg") {
-		options.intermediate = temp.path({ suffix: '.png' });; // create an intermediate file that can be processed, then deleted
+		options.intermediate = temp.path({ suffix: '.png' }); // create an intermediate file that can be processed, then deleted
 		capture(options.intermediate, function(error, completed){
 			callbackReturn.apply(this, arguments);
 		});
@@ -46,7 +46,7 @@ module.exports = function(options, callback) {
 		var cmdBuilder = [
 			"screencapture",
 			"-t", path.extname(output).toLowerCase().substring(1), // will create PNG by default
-			"-x", output
+			"-x", '"' + output + '"'
 		];
 		if (options.windowId){
 			// Will only capture the specified window id.
